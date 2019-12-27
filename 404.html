@@ -110,7 +110,7 @@
 				} else if (line.indexOf('> ') === 0) {
 					return `<blockquote><p>${line.replace('> ')}</p></blockquote>`;
 				} else {
-					return `<p>${x}</p>`;
+					return `<p>${line}</p>`;
 				}
 			}).join('');
 		};
