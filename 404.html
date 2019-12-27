@@ -14,11 +14,11 @@
 		cursor: text;
 	}
 	body {
-		font-family: Seravek, 'Myraid Pro', 'Myriad Set', Myriad, 'Open Sans', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+		font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Helvetica', 'Open Sans', 'Ubuntu', 'Arial', sans-serif, 'PingFang SC', '.PingFang SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Hiragino Sans GB', 'YuGothic', 'Heiti SC';
 		font-weight: 200;
-		font-size: 18px;
-		color: #555556;
-		line-height: 31.5px;
+		font-size: 20px;
+		color: #000;
+		line-height: 30px;
 		background: #FFF;
 		min-height: 100vh;
 		padding: 0;
@@ -44,7 +44,7 @@
 		font-family: 'Menlo', monospace;
 		font-size: 16px;
 		font-weight: 500;
-		color: #CCC;
+		color: #AAA;
 		margin: 0 0 15px;
 	}
 	#text {
@@ -52,9 +52,9 @@
 	}
 	#text, #text * {
 		font-weight: 300;
-		font-size: 18px;
+		font-size: 20px;
 		color: #555556;
-		line-height: 29px;
+		line-height: 30px;
 		background: none;
 		width: 100%;
 		padding: 0;
@@ -64,6 +64,13 @@
 		outline: none;
 		overflow: auto;
 		resize: none;
+	}
+	footer {
+		font-size: 16px;
+		color: #AAA;
+	}
+	footer a {
+		color: inherit;
 	}
 	</style>
 	<script type="text/javascript">
@@ -75,7 +82,14 @@
 		</div>
 		<div id="text">
 		</div>
-		<footer></footer>
+		<footer>
+			<div class="">
+				RawPreview service software &copy; Neruthes 2019<script>document.write((function (d) { return d.getFullYear() == '2019' ? '' : '-' + d.getFullYear()})(new Date()))</script>
+			</div>
+			<div class="">
+				<a href="https://github.com/neruthes/RawPreview">Source code</a> is published under <a href=""></a>
+			</div>
+		</footer>
 		<script type="text/javascript">
 		var filePath = location.pathname.replace(/^.+?fbd30a70\//, '');
 		document.querySelector('#filepath').innerHTML = filePath;
