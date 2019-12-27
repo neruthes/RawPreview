@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-- 103 -->
 <head>
 	<meta charset="utf-8" />
 	<title>RawPreview</title>
@@ -96,17 +97,17 @@
 		</footer>
 		<script type="text/javascript">
 		var markdownRender = function (text) {
-			text.split('\n\n').map(function (line) {
+			return text.split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
-					return `<h1>${line.replace('# ')}</h1>`;
+					return `<h1>${line.replace('# ', '')}</h1>`;
 				} else if (line.indexOf('## ') === 0) {
-					return `<h2>${line.replace('## ')}</h2>`;
+					return `<h2>${line.replace('## ', '')}</h2>`;
 				} else if (line.indexOf('### ') === 0) {
-					return `<h3>${line.replace('### ')}</h3>`;
+					return `<h3>${line.replace('### ', '')}</h3>`;
 				} else if (line.indexOf('#### ') === 0) {
-					return `<h4>${line.replace('#### ')}</h4>`;
+					return `<h4>${line.replace('#### ', '')}</h4>`;
 				} else if (line.indexOf('> ') === 0) {
-					return `<blockquote><p>${line.replace('> ')}</p></blockquote>`;
+					return `<blockquote><p>${line.replace('> ', '')}</p></blockquote>`;
 				} else {
 					return `<p>${line}</p>`;
 				}
@@ -130,6 +131,5 @@
         })();
 		</script>
 	</div>
-	<!-- 102 -->
 </body>
 </html>
