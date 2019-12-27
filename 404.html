@@ -115,7 +115,8 @@
 		};
 		</script>
 		<script type="text/javascript">
-		var filePath = location.pathname.replace(/^.+?fbd30a70\//, '');
+		var versionedfilePath = location.pathname.replace(/^.+?fbd30a70\//, '');
+		var filePath = versionedfilePath.replace(/@[0-9a-f]+\//, '/')
 		var blobMasterPath = filePath.replace('/', '{X}').replace('/', '/blob/master/').replace('{X}', '/');
 		var githubUsername = filePath.match(/^([^\/]+?)\//)[1];
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
@@ -124,7 +125,7 @@
 		document.querySelector('#author-profile').innerHTML = `<a href="https://github.com/${githubUsername}">User @${githubUsername} on GitHub</a>`;
 		(function () {
             window.xhr = new XMLHttpRequest();
-            xhr.open('get', `https://cdn.jsdelivr.net/gh/${filePath}`);
+            xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
             xhr.onload = function (e) {
 				console.log(e);
                 document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
