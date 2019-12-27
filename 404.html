@@ -65,7 +65,7 @@
 		resize: none;
 	}
 	#text * {
-		margin: 1em;
+		margin: 1em 0;
 	}
 	footer {
 		font-size: 16px;
@@ -93,13 +93,32 @@
 			</div>
 		</footer>
 		<script type="text/javascript">
+		var markdownRender = function (text) {
+			text.split('\n\n').map(function (line) {
+				if (line.indexOf('# ') === 0) {
+					return `<h1>${x.replace('# ')}</h1>`;
+				} else if (line.indexOf('## ') === 0) {
+					return `<h2>${x.replace('## ')}</h2>`;
+				} else if (line.indexOf('### ') === 0) {
+					return `<h3>${x.replace('### ')}</h3>`;
+				} else if (line.indexOf('#### ') === 0) {
+					return `<h4>${x.replace('#### ')}</h4>`;
+				} else if (line.indexOf('> ') === 0) {
+					return `<blockquote><p>${x.replace('> ')}</p></blockquote>`;
+				} else {
+					return `<p>${x}</p>`;
+				}
+			}).join('');
+		};
+		</script>
+		<script type="text/javascript">
 		var filePath = location.pathname.replace(/^.+?fbd30a70\//, '');
 		document.querySelector('#filepath').innerHTML = filePath;
 		(function () {
             var xhr = new XMLHttpRequest();
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${filePath}`);
             xhr.onload = function (e) {
-                document.querySelector('#text').innerHTML = e.target.responseText.split('\n\n').map(x=>`<p>${x}</p>`).join('')
+                document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
             };
             xhr.send();
         })();
