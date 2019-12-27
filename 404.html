@@ -2,13 +2,11 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Notes</title>
+	<title>RawPreview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/joyneop.ico">
-	<link rel="apple-touch-icon" href="/joyneop.png">
+	<link rel="shortcut icon" href="/neruthes.ico">
+	<link rel="apple-touch-icon" href="/neruthes.png">
 	<style type="text/css">
-	@import url(/fonts/seravek.css);
-	@import url(/fonts/erato.css);
 	* {
 		text-rendering: optimizeLegibility;
 	}
@@ -118,17 +116,20 @@
 		<script type="text/javascript">
 		var filePath = location.pathname.replace(/^.+?fbd30a70\//, '');
 		var blobMasterPath = filePath.replace('/', '{X}').replace('/', '/blob/master/').replace('{X}', '/');
+		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
+		document.title = fileName + ' - RawPreview';
 		document.querySelector('#filepath').innerHTML = `File: <a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 		(function () {
-            var xhr = new XMLHttpRequest();
+            window.xhr = new XMLHttpRequest();
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${filePath}`);
             xhr.onload = function (e) {
+				console.log(e);
                 document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
             };
             xhr.send();
         })();
 		</script>
 	</div>
-	<!-- 101 -->
+	<!-- 102 -->
 </body>
 </html>
