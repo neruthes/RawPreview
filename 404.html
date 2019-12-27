@@ -35,7 +35,7 @@
 	}
 	@media screen and (min-width: 769px) {
 		#cont {
-			max-width: 700px;
+			max-width: 800px;
 			padding: 40px 60px;
 		}
 	}
@@ -45,6 +45,10 @@
 		font-weight: 500;
 		color: #AAA;
 		margin: 0 0 15px;
+	}
+	#filepath a {
+		color: inherit;
+		text-decoration: none;
 	}
 	#text {
 		min-height: 80vh;
@@ -96,15 +100,15 @@
 		var markdownRender = function (text) {
 			text.split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
-					return `<h1>${x.replace('# ')}</h1>`;
+					return `<h1>${line.replace('# ')}</h1>`;
 				} else if (line.indexOf('## ') === 0) {
-					return `<h2>${x.replace('## ')}</h2>`;
+					return `<h2>${line.replace('## ')}</h2>`;
 				} else if (line.indexOf('### ') === 0) {
-					return `<h3>${x.replace('### ')}</h3>`;
+					return `<h3>${line.replace('### ')}</h3>`;
 				} else if (line.indexOf('#### ') === 0) {
-					return `<h4>${x.replace('#### ')}</h4>`;
+					return `<h4>${line.replace('#### ')}</h4>`;
 				} else if (line.indexOf('> ') === 0) {
-					return `<blockquote><p>${x.replace('> ')}</p></blockquote>`;
+					return `<blockquote><p>${line.replace('> ')}</p></blockquote>`;
 				} else {
 					return `<p>${x}</p>`;
 				}
@@ -113,7 +117,8 @@
 		</script>
 		<script type="text/javascript">
 		var filePath = location.pathname.replace(/^.+?fbd30a70\//, '');
-		document.querySelector('#filepath').innerHTML = filePath;
+		var blobMasterPath = filePath.replace('/', '{X}').replace('/', '/blob/master/').replace('{X}', '/');
+		document.querySelector('#filepath').innerHTML = `File: <a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 		(function () {
             var xhr = new XMLHttpRequest();
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${filePath}`);
