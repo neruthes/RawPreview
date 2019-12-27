@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- 103 -->
+<!-- 104 -->
 <head>
 	<meta charset="utf-8" />
 	<title>RawPreview</title>
@@ -121,7 +121,7 @@
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
 		document.title = fileName + ' - RawPreview';
 		document.querySelector('#filepath').innerHTML = `File: <a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
-		document.querySelector('#author-profile').innerHTML = `<a href="https://github.com/${githubUsername}">@${githubUsername} on GitHub</a>`
+		document.querySelector('#author-profile').innerHTML = `<a href="https://github.com/${githubUsername}">@${githubUsername} on GitHub</a>`;
 		(function () {
             window.xhr = new XMLHttpRequest();
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${filePath}`);
