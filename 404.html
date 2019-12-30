@@ -112,7 +112,7 @@
 					return '<hr />';
 				} else {
 					return `<p>${line}</p>`;
-				}
+				};
 			}).join('');
 		};
 		</script>
@@ -130,7 +130,14 @@
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
             xhr.onload = function (e) {
 				console.log(e);
+				// Write content
                 document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
+
+				// Update title
+				if (document.querySelectorAll('h1').length !== 0) {
+					// If any specified title in document
+					document.title = document.querySelectorAll('h1')[0].innerText;
+				}
             };
             xhr.send();
         })();
