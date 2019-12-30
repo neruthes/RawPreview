@@ -38,14 +38,14 @@
 			padding: 40px 60px;
 		}
 	}
-	#filepath {
+	#js-section-filepath {
 		font-family: 'Menlo', monospace;
 		font-size: 14px;
 		font-weight: 400;
 		color: #777;
 		margin: 0 0 15px;
 	}
-	#filepath a {
+	#js-section-filepath a {
 		color: inherit;
 		text-decoration: none;
 	}
@@ -88,7 +88,9 @@
 </head>
 <body>
 	<div id="cont">
-		<div id="filepath">
+		<div id="js-section-indexlink">
+		</div>
+		<div id="js-section-filepath">
 		</div>
 		<div id="text">
 		</div>
@@ -130,8 +132,10 @@
 		var blobMasterPath = filePath.replace('/', '{X}').replace('/', '/blob/master/').replace('{X}', '/');
 		var githubUsername = filePath.match(/^([^\/]+?)\//)[1];
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
+		var githubRepo = blobMasterPath.replace(githubUsername, '').slice(1).slice(0, blobMasterPath.replace(githubUsername, '').slice(1).indexOf('/'));
 		document.title = fileName + ' - RawPreview';
-		document.querySelector('#filepath').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
+		document.querySelector('#js-section-filepath').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
+		document.querySelector('#js-section-indexlink').innerHTML = `Index: <a id="anchor-js-section-indexlink" target="_blank" href="https://${githubUsername}.github.io/${githubRepo}">${filePath}</a>`;
 		document.querySelector('#author-profile').innerHTML = `<a href="https://github.com/${githubUsername}">User @${githubUsername} on GitHub</a>`;
 		(function () {
             window.xhr = new XMLHttpRequest();
