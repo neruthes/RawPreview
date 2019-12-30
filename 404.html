@@ -46,8 +46,8 @@
 		margin: 0 0 15px;
 	}
 	.header-type-alpha a {
-		color: inherit;
-		text-decoration: none;
+		color: #333;
+		text-decoration: underline;
 	}
 	#text {
 		font-family: -apple-system-serif, 'Charter', 'Iowan Old Style', 'Georgia', 'Helvetica Neue', 'Helvetica', 'Open Sans', 'Ubuntu', 'Arial', sans-serif, 'Songti SC', 'PingFang SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Hiragino Sans GB', 'YuGothic', 'Heiti SC';
@@ -149,7 +149,7 @@
 				if (document.querySelectorAll('h1').length !== 0) {
 					// If any specified title in document
 					document.title = document.querySelectorAll('h1')[0].innerText + ' - RawPreview';
-				}
+				};
             };
             xhr.send();
         })();
