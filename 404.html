@@ -129,7 +129,7 @@
 		var githubUsername = filePath.match(/^([^\/]+?)\//)[1];
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
 		document.title = fileName + ' - RawPreview';
-		document.querySelector('#filepath').innerHTML = `File: <a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
+		document.querySelector('#filepath').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 		document.querySelector('#author-profile').innerHTML = `<a href="https://github.com/${githubUsername}">User @${githubUsername} on GitHub</a>`;
 		(function () {
             window.xhr = new XMLHttpRequest();
