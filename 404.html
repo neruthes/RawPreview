@@ -110,7 +110,7 @@
 		</footer>
 		<script type="text/javascript">
 		var markdownRender = function (text) {
-			return text.split('\n\n').map(function (line) {
+			return text.replace(/\n{3,100}/g, '\n\n').split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
 					return `<h1>${line.replace('# ', '')}</h1>`;
 				} else if (line.indexOf('## ') === 0) {
