@@ -148,7 +148,11 @@
 					return `<h4>${line.replace('#### ', '')}</h4>`;
 				} else if (line.indexOf('> ') === 0) {
 					return `<blockquote><p>${line.replace('> ', '')}</p></blockquote>`;
-				} else if (line.indexOf('***') === 0) {
+				} else if (
+					line.indexOf('---') === 0 ||
+					line.indexOf('***') === 0 ||
+					line.indexOf('* * *') === 0
+				) {
 					return '<hr />';
 				} else {
 					return `<p>${line}</p>`;
