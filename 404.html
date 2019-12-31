@@ -83,8 +83,6 @@
 		color: #06E;
 		text-decoration: none;
 	}
-	#text a[data-deco="bracket"]::before { content: "[ "; }
-	#text a[data-deco="bracket"]::after { content: " ]"; }
 	footer {
 		font-size: 14px;
 		line-height: 20px;
@@ -95,6 +93,15 @@
 	}
 	footer a {
 		color: inherit;
+	}
+	</style>
+	<style media="screen">
+	/* Deco: bracket */
+	#text a[data-deco="bracket"]::before { content: "[ "; }
+	#text a[data-deco="bracket"]::after { content: " ]"; }
+	/* Deco: underline */
+	#text a[data-deco="undeline"] {
+		text-decoration: underline;
 	}
 	</style>
 	<script type="text/javascript">
