@@ -97,19 +97,16 @@
 	<div id="cont">
 		<div class="header-type-alpha" id="js-section-indexlink">
 		</div>
-		<div class="header-type-alpha" id="js-section-filepath">
-		</div>
 		<div id="text">
+		</div>
+		<div class="header-type-alpha" id="js-section-filepath">
 		</div>
 		<footer>
 			<div class="">
 				&copy; <span id="author-profile"></span> document content.
 			</div>
 			<div class="">
-				&copy; <a href="https://neruthes.xyz/">Neruthes</a> 2019<script>document.write((function (d) { return d.getFullYear() == '2019' ? '' : '-' + d.getFullYear()})(new Date()))</script> RawPreview service software.
-			</div>
-			<div class="">
-				<a href="https://github.com/neruthes/RawPreview">Source code</a> is published under <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>.
+				&copy; <a href="https://neruthes.xyz/">Neruthes</a> 2019<script>document.write((function (d) { return d.getFullYear() == '2019' ? '' : '-' + d.getFullYear()})(new Date()))</script> RawPreview service software. <a href="https://github.com/neruthes/RawPreview">Source code</a> is published under <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>.
 			</div>
 			<div class="">
 				This document is visible here becuase it is available over &lt;www.jsdelivr.com&gt;. If you, as the copyright owner of this document or as an eligible delegate of the copyright owner of this document, wish to take it down, please contact &lt;www.jsdelivr.com&gt;.
@@ -165,5 +162,13 @@
         })();
 		</script>
 	</div>
+	<script type="text/javascript">
+	(function () {
+		// Removed index link if not specified
+		if (!location.search.match(/[&?]indexType1=yes/)) {
+			document.querySelector('#js-section-filepath').remove();
+		};
+	})();
+	</script>
 </body>
 </html>
