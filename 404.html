@@ -172,7 +172,7 @@
 				) {
 					return '<hr />';
 				} else {
-					return `<p>${line}</p>`;
+					return `<p>${line.replace(/\n/g, ' ')}</p>`;
 				};
 			}).join('');
 		};
