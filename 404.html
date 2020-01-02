@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/neruthes.ico">
 	<link rel="apple-touch-icon" href="/neruthes.png">
+	<script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/index.js" integrity="sha256-rGRJ0RqVa1+lVEvELq0LoabQRhkkJR5Y2KmK1eHcMlQ=" crossorigin="anonymous"></script>
 	<style type="text/css">
 	* {
 		text-rendering: optimizeLegibility;
@@ -174,7 +175,7 @@
 		var inlineParser = function (line) {
 			var tmp = line.replace(/(\\\[|\\\]|\\\(|\\\)|\\\\|\\\*)/g, function () { return replacementMap_forward[arguments[0]] });
 			// console.log(tmp);
-			tmp = tmp.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+			tmp = tmp.replace(/\*([^*\s][^*]+[^*\s])\*/g, '<strong>$1</strong>');
 			tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
 			tmp = tmp.replace(/`(.+?)`/g, '<code>$1</code>');
 			tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
@@ -182,12 +183,35 @@
 		};
 		console.log( inlineParser('Markdown render test: *Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
 
-		var listParser = function (line, listType) {
-			var tmp = '\n' + line.trim().split('\n').join('\n\n') + '\n';
-			tmp = tmp.replace(/\n- ([^\n]+)\n/g, '<li>$1</li>');
-			tmp = `<${listType}>${inlineParser(tmp)}</${listType}>`;
-			return tmp;
+		var listParser = function (block, listType) {
+			var blockData = block.trim().split('\n').map(function (v, i) {
+				var raw = v.replace(/\s\s/g, '\t');
+				return {
+					rawText: raw,
+					indentLevel: raw.match(/\t/g) === null ? 0 : raw.match(/\t/g).length
+				};
+			});
+			console.log(blockData);
+			var tmp = blockData.map(function (v, i, arr) {
+				var row = v.rawText;
+				console.log(row);
+				row = (new Array(v.indentLevel)).fill('\t').join('') + `<li>${row.slice(v.indentLevel+2)}</li>`;
+				if (i > 0) {
+					if (v.indentLevel > arr[i-1].indentLevel) {
+						row = `<${listType}>${row}`;
+					};
+					if (v.indentLevel < arr[i-1].indentLevel) {
+						row = `${row}</${listType}>`;
+					};
+				};
+				if (i === arr.length) {
+					row = row + (new Array(v.indentLevel)).fill(`</${listType}>`).join('')
+				};
+				return row;
+			}).join('\n');
+			return `<${listType}>\n\n${tmp}\n\n</${listType}>`;
 		};
+		document.write(listParser(`- 123\n  - 456\n- 789\n  - 1234\n    - 5678\n    - 9999`, 'ul'));
 
 		var markdownRender = function (text) {
 
@@ -237,13 +261,14 @@
             window.xhr = new XMLHttpRequest();
             xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
             xhr.onload = function (e) {
+
 				console.log(e);
 				// Write content
                 if (fileName.match(/\.(md|txt)$/)) {
-                	// document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
-                	document.querySelector('#text').innerHTML = markdownRender(xhr.responseText);
+                	var md = window.markdownit();
+                	document.querySelector('#text').innerHTML = md.render(xhr.responseText);
                 } else {
-					document.querySelector('#text').innerHTML = e.target.responseText;
+					document.querySelector('#text').innerHTML = xhr.responseText;
 				};
 
 				// Update title
