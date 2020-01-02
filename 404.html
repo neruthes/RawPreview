@@ -154,6 +154,34 @@
 		</footer>
 		<script type="text/javascript">
 		var markdownRender = function (text) {
+			var replacementMapPrototype = [
+				['\\[', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_00__'],
+				['\\]', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_01__'],
+				['\\(', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_02__'],
+				['\\)', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_03__'],
+				['\\\\', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_04__'],
+				['\\*', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_05__']
+			];
+			var gen = function (key, val) {
+				var obj = {};
+				replacementMapPrototype.map(function (x) {
+					obj[x[k]] = x[v];
+				});
+				return obj;
+			};
+			var replacementMap_forward = gen(0, 1);
+			var replacementMap_reverse = gen(1, 0);
+
+			var inlineParser = function (line) {
+				var tmp = line.replace(/(\\\[|\\\]|\\\(|\\\)|\\\\|\\\*)/g, function () { return replacementMap_forward[arguments[0]] });
+				// console.log(tmp);
+				tmp = tmp.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+				tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
+				tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
+				return tmp;
+			};
+			document.write( inlineParser('*Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
+
 			return text.replace(/\n{3,100}/g, '\n\n').split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
 					return `<h1>${line.replace('# ', '')}</h1>`;
