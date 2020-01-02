@@ -171,6 +171,8 @@
 					line.indexOf('* * *') === 0
 				) {
 					return '<hr />';
+				} else if (line.indexOf('**********') === 0) {
+					return '<hr style="width: 100%;" />';
 				} else {
 					return `<p>${line.replace(/\n/g, ' ')}</p>`;
 				};
@@ -214,7 +216,7 @@
 	(function () {
 		// Removed index link if not specified
 		if (!location.search.match(/[&?]indexType1=yes/)) {
-			document.querySelector('#js-section-filepath').remove();
+			document.querySelector('#js-section-indexlink').remove();
 		};
 	})();
 	</script>
