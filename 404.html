@@ -58,6 +58,10 @@
 	.header-type-alpha a:hover {
 		color: #000;
 	}
+	#header-type-alpha {
+		padding-bottom: 30px !important;
+		border-bottom: 1px solid #E5E5E5;
+	}
 	.section-divider {
 		background: #E5E5E5;
 		border: none;
@@ -133,9 +137,10 @@
 <body>
 	<div id="cont">
 		<div class="header-type-alpha" id="js-section-indexlink">
+			<div id="js-section-indexlink-inner">
+			</div>
 		</div>
-		<div class="section-divider">
-		</div>
+
 
 		<div id="text">
 		</div>
@@ -143,6 +148,8 @@
 		<div class="section-divider">
 		</div>
 		<div class="header-type-alpha" id="js-section-filepath" style="padding: 0 0 40px;">
+			<div id="js-section-filepath-inner">
+			</div>
 		</div>
 
 		<footer>
@@ -164,8 +171,8 @@
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
 		var githubRepo = blobMasterPath.replace(githubUsername, '').slice(1).slice(0, blobMasterPath.replace(githubUsername, '').slice(1).indexOf('/'));
 		document.title = fileName + ' - RawPreview';
-		document.querySelector('#js-section-filepath').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
-		document.querySelector('#js-section-indexlink').innerHTML = `Index: <a id="anchor-js-section-indexlink" href="https://${githubUsername}.github.io/${githubRepo}/">${githubUsername}.github.io/${githubRepo}/</a>`;
+		document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
+		document.querySelector('#js-section-indexlink-inner').innerHTML = `Index: <a id="anchor-js-section-indexlink" href="https://${githubUsername}.github.io/${githubRepo}/">${githubUsername}.github.io/${githubRepo}/</a>`;
 		document.querySelector('#author-profile').innerHTML = `User <a href="https://github.com/${githubUsername}">@${githubUsername}</a> on GitHub`;
 		(function () {
             window.xhr = new XMLHttpRequest();
