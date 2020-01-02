@@ -182,8 +182,8 @@
 		console.log( inlineParser('Markdown render test: *Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
 
 		var listParser = function (line, listType) {
-			var tmp = line.trim().split('\n').join('\n\n');
-			tmp = tmp.replace(/\n- ([^\n]+)/g, '<li>$1</li>');
+			var tmp = '\n' + line.trim().split('\n').join('\n\n') + '\n';
+			tmp = tmp.replace(/\n- ([^\n]+)\n/g, '<li>$1</li>');
 			tmp = `<${listType}>${inlineParser(tmp)}</${listType}>`;
 			return tmp;
 		};
@@ -218,6 +218,7 @@
 				};
 			}).join('');
 		};
+
 		console.log('Markdown render test: ' + markdownRender('[123](https://example.com)'));
 		</script>
 		<script type="text/javascript">
@@ -238,7 +239,8 @@
 				console.log(e);
 				// Write content
                 if (fileName.match(/\.(md|txt)$/)) {
-                	document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
+                	// document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
+                	document.querySelector('#text').innerHTML = markdownRender(xhr.responseText);
                 } else {
 					document.querySelector('#text').innerHTML = e.target.responseText;
 				};
