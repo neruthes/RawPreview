@@ -99,6 +99,9 @@
 		color: #06E;
 		text-decoration: none;
 	}
+	#text > :first-child {
+		margin-top: 0 !important;
+	}
 	footer {
 		font-size: 14px;
 		line-height: 20px;
@@ -191,7 +194,11 @@
             xhr.onload = function (e) {
 				console.log(e);
 				// Write content
-                document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
+                if (fileName.match(/\.(md|txt)$/)) {
+                	document.querySelector('#text').innerHTML = markdownRender(e.target.responseText);
+                } else {
+					document.querySelector('#text').innerHTML = e.target.responseText;
+				};
 
 				// Update title
 				if (document.querySelectorAll('h1').length !== 0) {
