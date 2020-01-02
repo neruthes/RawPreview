@@ -7,7 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/neruthes.ico">
 	<link rel="apple-touch-icon" href="/neruthes.png">
+
 	<script src="/RawPreview/js/markdown-it.min.js" crossorigin="anonymous"></script>
+	<!-- Source: https://github.com/markdown-it/markdown-it -->
+
 	<style type="text/css">
 	* {
 		text-rendering: optimizeLegibility;
@@ -153,98 +156,6 @@
 				This document is available here becuase it is public on &lt;github.com&gt; and retrievable over &lt;www.jsdelivr.com&gt;. If you, as the copyright owner of this document or as an eligible delegate of the copyright owner of this document, wish to unpublish this document, please contact &lt;www.jsdelivr.com&gt;.
 			</div>
 		</footer>
-		<script type="text/javascript">
-		var replacementMapPrototype = [
-			['\\[', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_00__'],
-			['\\]', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_01__'],
-			['\\(', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_02__'],
-			['\\)', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_03__'],
-			['\\\\', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_04__'],
-			['\\*', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_05__']
-		];
-		var gen = function (key, val) {
-			var obj = {};
-			replacementMapPrototype.map(function (x) {
-				obj[x[key]] = x[val];
-			});
-			return obj;
-		};
-		var replacementMap_forward = gen(0, 1);
-		var replacementMap_reverse = gen(1, 0);
-
-		var inlineParser = function (line) {
-			var tmp = line.replace(/(\\\[|\\\]|\\\(|\\\)|\\\\|\\\*)/g, function () { return replacementMap_forward[arguments[0]] });
-			// console.log(tmp);
-			tmp = tmp.replace(/\*([^*\s][^*]+[^*\s])\*/g, '<strong>$1</strong>');
-			tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
-			tmp = tmp.replace(/`(.+?)`/g, '<code>$1</code>');
-			tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
-			return tmp;
-		};
-		console.log( inlineParser('Markdown render test: *Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
-
-		var listParser = function (block, listType) {
-			var blockData = block.trim().split('\n').map(function (v, i) {
-				var raw = v.replace(/\s\s/g, '\t');
-				return {
-					rawText: raw,
-					indentLevel: raw.match(/\t/g) === null ? 0 : raw.match(/\t/g).length
-				};
-			});
-			console.log(blockData);
-			var tmp = blockData.map(function (v, i, arr) {
-				var row = v.rawText;
-				console.log(row);
-				row = (new Array(v.indentLevel)).fill('\t').join('') + `<li>${row.slice(v.indentLevel+2)}</li>`;
-				if (i > 0) {
-					if (v.indentLevel > arr[i-1].indentLevel) {
-						row = `<${listType}>${row}`;
-					};
-					if (v.indentLevel < arr[i-1].indentLevel) {
-						row = `${row}</${listType}>`;
-					};
-				};
-				if (i === arr.length) {
-					row = row + (new Array(v.indentLevel)).fill(`</${listType}>`).join('')
-				};
-				return row;
-			}).join('\n');
-			return `<${listType}>\n\n${tmp}\n\n</${listType}>`;
-		};
-
-		var markdownRender = function (text) {
-
-			return text.replace(/\n{3,100}/g, '\n\n').split('\n\n').map(function (line) {
-				if (line.indexOf('# ') === 0) {
-					return `<h1>${line.replace('# ', '')}</h1>`;
-				} else if (line.indexOf('## ') === 0) {
-					return `<h2>${line.replace('## ', '')}</h2>`;
-				} else if (line.indexOf('### ') === 0) {
-					return `<h3>${line.replace('### ', '')}</h3>`;
-				} else if (line.indexOf('#### ') === 0) {
-					return `<h4>${line.replace('#### ', '')}</h4>`;
-				} else if (line.indexOf('> ') === 0) {
-					return `<blockquote><p>${line.replace('> ', '')}</p></blockquote>`;
-				} else if (line.indexOf('******') === 0) {
-					return '<hr style="width: 100%;" />';
-				} else if (line.indexOf('- ') === 0) {
-					return listParser(line, 'ul');
-				} else if (line.indexOf('* ') === 0) {
-					return listParser(line, 'ol');
-				} else if (
-					line.indexOf('---') === 0 ||
-					line.indexOf('***') === 0 ||
-					line.indexOf('* * *') === 0
-				) {
-					return '<hr />';
-				} else {
-					return `<p>${inlineParser(line.replace(/\n/g, ' '))}</p>`;
-				};
-			}).join('');
-		};
-
-		console.log('Markdown render test: ' + markdownRender('[123](https://example.com)'));
-		</script>
 		<script type="text/javascript">
 		var versionedfilePath = location.pathname.replace(/^.+?fbd30a70\//, '');
 		var filePath = versionedfilePath.replace(/@[0-9a-f]+\//, '/')
