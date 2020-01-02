@@ -180,7 +180,7 @@
 				tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
 				return tmp;
 			};
-			document.write( inlineParser('*Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
+			// document.write( inlineParser('*Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
 
 			return text.replace(/\n{3,100}/g, '\n\n').split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
