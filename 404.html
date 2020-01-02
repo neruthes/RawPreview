@@ -165,7 +165,7 @@
 			var gen = function (key, val) {
 				var obj = {};
 				replacementMapPrototype.map(function (x) {
-					obj[x[k]] = x[v];
+					obj[x[key]] = x[val];
 				});
 				return obj;
 			};
