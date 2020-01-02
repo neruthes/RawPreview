@@ -176,6 +176,7 @@
 			// console.log(tmp);
 			tmp = tmp.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
 			tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
+			tmp = tmp.replace(/`(.+?)`/g, '<code>$1</code>');
 			tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
 			return tmp;
 		};
