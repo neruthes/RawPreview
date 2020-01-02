@@ -153,34 +153,42 @@
 			</div>
 		</footer>
 		<script type="text/javascript">
-		var markdownRender = function (text) {
-			var replacementMapPrototype = [
-				['\\[', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_00__'],
-				['\\]', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_01__'],
-				['\\(', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_02__'],
-				['\\)', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_03__'],
-				['\\\\', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_04__'],
-				['\\*', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_05__']
-			];
-			var gen = function (key, val) {
-				var obj = {};
-				replacementMapPrototype.map(function (x) {
-					obj[x[key]] = x[val];
-				});
-				return obj;
-			};
-			var replacementMap_forward = gen(0, 1);
-			var replacementMap_reverse = gen(1, 0);
+		var replacementMapPrototype = [
+			['\\[', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_00__'],
+			['\\]', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_01__'],
+			['\\(', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_02__'],
+			['\\)', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_03__'],
+			['\\\\', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_04__'],
+			['\\*', '__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_05__']
+		];
+		var gen = function (key, val) {
+			var obj = {};
+			replacementMapPrototype.map(function (x) {
+				obj[x[key]] = x[val];
+			});
+			return obj;
+		};
+		var replacementMap_forward = gen(0, 1);
+		var replacementMap_reverse = gen(1, 0);
 
-			var inlineParser = function (line) {
-				var tmp = line.replace(/(\\\[|\\\]|\\\(|\\\)|\\\\|\\\*)/g, function () { return replacementMap_forward[arguments[0]] });
-				// console.log(tmp);
-				tmp = tmp.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
-				tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
-				tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
-				return tmp;
-			};
-			console.log( inlineParser('Markdown render test: *Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
+		var inlineParser = function (line) {
+			var tmp = line.replace(/(\\\[|\\\]|\\\(|\\\)|\\\\|\\\*)/g, function () { return replacementMap_forward[arguments[0]] });
+			// console.log(tmp);
+			tmp = tmp.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+			tmp = tmp.replace(/\[([^\[\]]+)\]\(([^\(\)]+)\)/g, '<a data-deco="underline" href="$2">$1</a>');
+			tmp = tmp.replace(/__NERUTHES_61f6628860f74bd4ae39459f0e2ea693_\d\d__/g, function () { return replacementMap_reverse[arguments[0]]});
+			return tmp;
+		};
+		console.log( inlineParser('Markdown render test: *Hello* world! Use \\* to [bold\\[#1](htts://en.wikipedia.org/TCP_\\(antiseptic\\)). Have fun!') );
+
+		var listParser = function (line, type) {
+			var tmp = '\n' + line.trim() + '\n';
+			tmp = tmp.replace(/\n- ([^\n]+)\n/g, '<li>$1</li>');
+			tmp = `<${type}>${tmp}</${type}>`;
+			return tmp;
+		};
+
+		var markdownRender = function (text) {
 
 			return text.replace(/\n{3,100}/g, '\n\n').split('\n\n').map(function (line) {
 				if (line.indexOf('# ') === 0) {
@@ -195,6 +203,10 @@
 					return `<blockquote><p>${line.replace('> ', '')}</p></blockquote>`;
 				} else if (line.indexOf('******') === 0) {
 					return '<hr style="width: 100%;" />';
+				} else if (line.indexOf('- ') === 0) {
+					return listParser(line, 'ul');
+				} else if (line.indexOf('* ') === 0) {
+					return listParser(line, 'ol');
 				} else if (
 					line.indexOf('---') === 0 ||
 					line.indexOf('***') === 0 ||
@@ -202,7 +214,7 @@
 				) {
 					return '<hr />';
 				} else {
-					return `<p>${line.replace(/\n/g, ' ')}</p>`;
+					return `<p>${inlineParser(line.replace(/\n/g, ' '))}</p>`;
 				};
 			}).join('');
 		};
