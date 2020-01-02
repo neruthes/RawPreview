@@ -211,7 +211,6 @@
 			}).join('\n');
 			return `<${listType}>\n\n${tmp}\n\n</${listType}>`;
 		};
-		document.write(listParser(`- 123\n  - 456\n- 789\n  - 1234\n    - 5678\n    - 9999`, 'ul'));
 
 		var markdownRender = function (text) {
 
