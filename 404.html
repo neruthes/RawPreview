@@ -205,5 +205,12 @@
 		};
 	})();
 	</script>
+	<script type="text/javascript">
+	window.setInterval(function () {
+		document.querySelectorAll('#text a:not([target="_top"])').forEach(function (node) {
+			node.setAttribute('target', '_top');
+		});
+	}, 150);
+	</script>
 </body>
 </html>
