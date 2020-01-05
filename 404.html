@@ -205,5 +205,14 @@
 		};
 	})();
 	</script>
+	<script type="text/javascript">
+	document.addEventListener('click', function (e) {
+		if (e.target.tagName.toUpperCase() === 'A') {
+			window.parent.postMessage(JSON.stringify({
+				locationHref: e.target.href
+			}), '*');
+		};
+	})
+	</script>
 </body>
 </html>
