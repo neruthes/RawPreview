@@ -208,7 +208,9 @@
 	<script type="text/javascript">
 	document.addEventListener('click', function (e) {
 		if (e.target.tagName.toUpperCase() === 'A') {
-			window.parent.postMessage(e.target.href, '*');
+			window.parent.postMessage({
+				href: e.target.href
+			}, '*');
 		};
 	})
 	</script>
