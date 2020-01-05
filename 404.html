@@ -206,13 +206,9 @@
 	})();
 	</script>
 	<script type="text/javascript">
-	console.log(window.parent);
 	document.addEventListener('click', function (e) {
-		console.log(e.target.href);
 		if (e.target.tagName.toUpperCase() === 'A') {
-			window.parent.postMessage(JSON.stringify({
-				locationHref: e.target.href
-			}), '*');
+			window.parent.postMessage(e.target.href, '*');
 		};
 	})
 	</script>
