@@ -195,18 +195,14 @@
 
 				console.log(e);
 				// Write content
-                if (fileName.match(/\.(md|txt)$/)) {
-                	var md = window.markdownit();
-					var textElement = document.querySelector('#text');
-					if (window.selectionRange) {
-						const pureText = document.createElement('pre');
-						pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
-						textElement.appendChild(pureText);
-					} else {
-						textElement.innerHTML = md.render(xhr.responseText);
-					}
-                } else {
-					document.querySelector('#text').innerHTML = xhr.responseText;
+            	var md = window.markdownit();
+				var textElement = document.querySelector('#text');
+				if (window.selectionRange) {
+					const pureText = document.createElement('pre');
+					pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
+					textElement.appendChild(pureText);
+				} else {
+					textElement.innerHTML = md.render(xhr.responseText);
 				};
 
 				// Update title
