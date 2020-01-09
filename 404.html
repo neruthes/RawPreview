@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 	(function () {
-		if (!location.search.match(/[&?]range=(\d+)-(\d+)/)) {
+		if (!!location.search.match(/[&?]range=(\d+)-(\d+)/)) {
 			var matchResultRaw = location.search.match(/[&?]range=(\d+)-(\d+)/);
 			if (matchResultRaw && matchResultRaw.length === 3) {
 				// Do it
