@@ -8,6 +8,21 @@
 	<link rel="shortcut icon" href="/neruthes.ico">
 	<link rel="apple-touch-icon" href="/neruthes.png">
 
+	<script type="text/javascript">
+	(function () {
+		if (!location.search.match(/[&?]range=(\d+)-(\d+)/)) {
+			var matchResultRaw = location.search.match(/[&?]range=(\d+)-(\d+)/);
+			if (matchResultRaw && matchResultRaw.length === 3) {
+				// Do it
+				window.selectionRange = [
+					matchResultRaw[1],
+					matchResultRaw[2]
+				]
+			};
+		};
+	})();
+	</script>
+
 	<script src="/RawPreview/js/markdown-it.min.js" crossorigin="anonymous"></script>
 	<!-- Source: https://github.com/markdown-it/markdown-it -->
 
@@ -182,7 +197,11 @@
 				// Write content
                 if (fileName.match(/\.(md|txt)$/)) {
                 	var md = window.markdownit();
-                	document.querySelector('#text').innerHTML = md.render(xhr.responseText);
+					if (window.selectionRange) {
+						document.querySelector('#text').innerHTML = md.render(xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]));
+					} else {
+						document.querySelector('#text').innerHTML = md.render(xhr.responseText);
+					}
                 } else {
 					document.querySelector('#text').innerHTML = xhr.responseText;
 				};
