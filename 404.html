@@ -197,10 +197,13 @@
 				// Write content
                 if (fileName.match(/\.(md|txt)$/)) {
                 	var md = window.markdownit();
+					var textElement = document.querySelector('#text');
 					if (window.selectionRange) {
-						document.querySelector('#text').innerHTML = md.render(xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n'));
+						const pureText = document.createElement('pre');
+						pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
+						textElement.appendChild(pureText);
 					} else {
-						document.querySelector('#text').innerHTML = md.render(xhr.responseText);
+						textElement.innerHTML = md.render(xhr.responseText);
 					}
                 } else {
 					document.querySelector('#text').innerHTML = xhr.responseText;
