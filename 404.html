@@ -198,7 +198,7 @@
                 if (fileName.match(/\.(md|txt)$/)) {
                 	var md = window.markdownit();
 					if (window.selectionRange) {
-						document.querySelector('#text').innerHTML = md.render(xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]));
+						document.querySelector('#text').innerHTML = md.render(xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join(''));
 					} else {
 						document.querySelector('#text').innerHTML = md.render(xhr.responseText);
 					}
