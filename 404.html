@@ -156,6 +156,18 @@
 	</script>
 </head>
 <body>
+	<script type="text/javascript">
+	// Detect CJK
+	(function () {
+		if (!!location.search.match(/[&?]cjk=yes/)) {
+			var tag = document.createElement('link');
+			tag.setAttribute('href', 'https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,600&display=swap&subset=chinese-simplified');
+			tag.setAttribute('rel', 'stylesheet');
+			document.head.appendChild(tag);
+		};
+	})();
+	</script>
+
 	<div id="cont">
 		<div class="header-type-alpha" id="js-section-indexlink">
 			<div id="js-section-indexlink-inner">
