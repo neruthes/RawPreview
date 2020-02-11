@@ -209,7 +209,7 @@
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
-            	xhr.open('get', `https://gist.githubusercontent.com/${githubUsername}/${githubRepo}/raw/${fileName}`);
+            	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
             } else {
 				xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
 			};
