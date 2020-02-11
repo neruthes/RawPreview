@@ -227,7 +227,7 @@
             if (githubUsername === 'githubgist') {
 				debug('3');
 				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}">${githubRepo.replace('---', '/')}</a>`;
-            	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
+            	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}?t=${Date.now()}`);
             } else {
 				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 				xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
