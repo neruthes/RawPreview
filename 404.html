@@ -208,7 +208,11 @@
 		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${githubUsername}">@${githubUsername}</a> on GitHub`;
 		(function () {
             window.xhr = new XMLHttpRequest();
-            xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
+            if (githubUsername === 'githubgist') {
+            	xhr.open('get', `https://gist.githubusercontent.com/${githubUsername}/${githubRepo}/raw/${fileName}`);
+            } else {
+				xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
+			};
             xhr.onload = function (e) {
 
 				console.log(e);
