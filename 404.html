@@ -203,14 +203,15 @@
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
 		var githubRepo = blobMasterPath.replace(githubUsername, '').slice(1).slice(0, blobMasterPath.replace(githubUsername, '').slice(1).indexOf('/'));
 		document.title = fileName + ' - RawPreview';
-		document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 		document.querySelector('#js-section-indexlink-inner').innerHTML = `Index: <a target="_top" id="anchor-js-section-indexlink" href="https://${githubUsername}.github.io/${githubRepo}/">${githubUsername}.github.io/${githubRepo}/</a>`;
 		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${githubUsername}">@${githubUsername}</a> on GitHub`;
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
+				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.split('---')[0]}/${githubRepo.split('---')[1]}/${fileName}</a>`;
             	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
             } else {
+				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
 				xhr.open('get', `https://cdn.jsdelivr.net/gh/${versionedfilePath}`);
 			};
             xhr.onload = function (e) {
