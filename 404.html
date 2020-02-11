@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 	var debug = function (msg) {
-		if (location.match(/[?&]debug=yes/)) {
+		if (location.search.match(/[?&]debug=yes/)) {
 			alert(msg);
 		};
 	};
@@ -228,7 +228,7 @@
 				// Write content
             	var md = window.markdownit();
 				var textElement = document.querySelector('#text');
-				if (window.selectionRange || location.match(/[?&]plain=yes/)) {
+				if (window.selectionRange || location.search.match(/[?&]plain=yes/)) {
 					var pureText = document.createElement('pre');
 					pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
 					textElement.appendChild(pureText);
