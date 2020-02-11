@@ -220,8 +220,8 @@
 				// Write content
             	var md = window.markdownit();
 				var textElement = document.querySelector('#text');
-				if (window.selectionRange) {
-					const pureText = document.createElement('pre');
+				if (window.selectionRange || location.match(/[?&]plain=yes/)) {
+					var pureText = document.createElement('pre');
 					pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
 					textElement.appendChild(pureText);
 				} else {
