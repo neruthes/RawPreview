@@ -210,13 +210,20 @@
 		var githubUsername = filePath.match(/^([^\/]+?)\//)[1];
 		var fileName = blobMasterPath.replace(/^.+?\/blob\/master\//, '');
 		var githubRepo = blobMasterPath.replace(githubUsername, '').slice(1).slice(0, blobMasterPath.replace(githubUsername, '').slice(1).indexOf('/'));
+		var getRealGithubUsername = (function () {
+			if (githubUsername === 'githubgist') {
+				return githubRepo.split('---')[0];
+			} else {
+				return githubUsername;
+			}
+		})();
 		document.title = fileName + ' - RawPreview';
 		document.querySelector('#js-section-indexlink-inner').innerHTML = `Index: <a target="_top" id="anchor-js-section-indexlink" href="https://${githubUsername}.github.io/${githubRepo}/">${githubUsername}.github.io/${githubRepo}/</a>`;
-		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${githubUsername}">@${( (githubUsername === 'githubgist') ? githubRepo.split('---')[0] : githubUsername )}</a> on GitHub`;
+		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${getRealGithubUsername}">@${getRealGithubUsername}</a> on GitHub`;
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
-				debug('2');
+				debug('3');
 				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.replace('---', '/')}/${fileName}</a>`;
             	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
             } else {
