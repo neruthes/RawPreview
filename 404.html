@@ -9,6 +9,13 @@
 	<link rel="apple-touch-icon" href="/neruthes.png">
 
 	<script type="text/javascript">
+	var debug = function (msg) {
+		if (location.match(/[?&]debug=yes/)) {
+			alert(msg);
+		};
+	};
+	</script>
+	<script type="text/javascript">
 	(function () {
 		if (!!location.search.match(/[&?]range=(\d+)-(\d+)/)) {
 			var matchResultRaw = location.search.match(/[&?]range=(\d+)-(\d+)/);
@@ -208,7 +215,8 @@
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
-				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.replace('---', '/')/${fileName}</a>`;
+				debug('1');
+				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.replace('---', '/')}/${fileName}</a>`;
             	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
             } else {
 				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
