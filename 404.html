@@ -208,7 +208,7 @@
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
-				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.split('---')[0]}/${githubRepo.split('---')[1]}/${fileName}</a>`;
+				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://gist.github.com/${githubRepo.replace('---', '/')}/${fileName}">${githubRepo.replace('---', '/')/${fileName}</a>`;
             	xhr.open('get', `https://gist.githubusercontent.com/${githubRepo.replace('---', '/')}/raw/${fileName}`);
             } else {
 				document.querySelector('#js-section-filepath-inner').innerHTML = `This webpage is the online preview of:<br /><a id="anchor-js-section-filepath" target="_blank" href="https://github.com/${blobMasterPath}">${filePath}</a>`;
