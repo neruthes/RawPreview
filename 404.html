@@ -211,7 +211,7 @@
 		var githubRepo = blobMasterPath.replace(githubUsername, '').slice(1).slice(0, blobMasterPath.replace(githubUsername, '').slice(1).indexOf('/'));
 		document.title = fileName + ' - RawPreview';
 		document.querySelector('#js-section-indexlink-inner').innerHTML = `Index: <a target="_top" id="anchor-js-section-indexlink" href="https://${githubUsername}.github.io/${githubRepo}/">${githubUsername}.github.io/${githubRepo}/</a>`;
-		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${githubUsername}">@${githubUsername}</a> on GitHub`;
+		document.querySelector('#author-profile').innerHTML = `User <a target="_top" href="https://github.com/${githubUsername}">@${( (githubUsername === 'githubgist') ? githubRepo.split('---')[0] : githubUsername )}</a> on GitHub`;
 		(function () {
             window.xhr = new XMLHttpRequest();
             if (githubUsername === 'githubgist') {
