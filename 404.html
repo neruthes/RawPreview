@@ -17,6 +17,7 @@
 	</script>
 	<script type="text/javascript">
 	(function () {
+		window.selectionRange = [0, Number.MAX_SAFE_INTEGER];
 		if (!!location.search.match(/[&?]range=(\d+)-(\d+)/)) {
 			var matchResultRaw = location.search.match(/[&?]range=(\d+)-(\d+)/);
 			if (matchResultRaw && matchResultRaw.length === 3) {
@@ -230,7 +231,7 @@
 				var textElement = document.querySelector('#text');
 				if (window.selectionRange || location.search.match(/[?&]plain=yes/)) {
 					var pureText = document.createElement('pre');
-					pureText.textContent = xhr.responseText.split('\n').slice(selectionRange[0], selectionRange[1]).join('\n');
+					pureText.textContent = xhr.responseText.split('\n').slice(window.selectionRange[0], window.selectionRange[1]).join('\n');
 					textElement.appendChild(pureText);
 				} else {
 					textElement.innerHTML = md.render(xhr.responseText);
